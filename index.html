@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Rwanda - Empowering Through Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5530;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #2c5530;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hills" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 20 Q10 0 20 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23hills)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #2c5530;
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .journey-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .journey-card h3 {
+            color: #2c5530;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .partnership-section {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            padding: 5rem 0;
+        }
+
+        .partnership-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .partnership-highlight {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .partnership-highlight h3 {
+            color: #2c5530;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+
+        .portfolio-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, #e9ecef, #f8f9fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h4 {
+            color: #2c5530;
+            margin-bottom: 0.5rem;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .lesson-card {
+            background: linear-gradient(135deg, #2c5530, #4a7c59);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .lesson-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .lesson-card p {
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .independence-timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: #2c5530;
+            border-radius: 50%;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2c5530, #4a7c59);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #2c5530;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            background: #1a3d1f;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Impact Rwanda</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#journey" class="nav-link">Journey</a></li>
+                <li><a href="#partnership" class="nav-link">Partnership</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#mentorship" class="nav-link">Mentorship</a></li>
+                <li><a href="#lessons" class="nav-link">Lessons</a></li>
+                <li><a href="#future" class="nav-link">Future</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Empowering Through Design</h1>
+            <p class="hero-subtitle">Training young Rwandan women in graphic design skills, fostering partnerships, and building sustainable income opportunities in the land of a thousand hills.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Young Women Trained</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Months of Partnership</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">Growing Design Business</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </section>
+
+    <section id="journey" class="section">
+        <h2>The Journey</h2>
+        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">From student entrepreneur to international mentor, this journey began with a simple question: How can I offer my skills and resources to support those in need?</p>
+        
+        <div class="journey-grid">
+            <div class="journey-card">
+                <h3>The Beginning</h3>
+                <p>In 2021, I began creating and selling artwork, developing it into a small business. As a sophomore at Trinity Academy, my graphic design class sparked a deeper passion for how design can communicate ideas and create impact.</p>
+            </div>
+            
+            <div class="journey-card">
+                <h3>Rwanda Discovery</h3>
+                <p>Traveling to Rwanda through Apostles Raleigh opened my eyes to the "land of a thousand hills." Meeting youth and women with great entrepreneurial spirit but limited resources sparked a desire to share my skills and resources.</p>
+            </div>
+            
+            <div class="journey-card">
+                <h3>Partnership with Mother's Union</h3>
+                <p>Meeting Clementine Dushimimana, a key leader in the Mother's Union (est. 1955, 3,050+ women), led to developing a collaborative project focused on digital art and graphic design training for young women.</p>
+            </div>
+            
+            <div class="journey-card">
+                <h3>February 2024 Training</h3>
+                <p>Returned to Rwanda with iPads, design software, printers, and a comprehensive curriculum. Spent intensive weeks training young women in "soft design" - digital graphic design skills that could lead to sustainable income.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="partnership-section">
+        <section id="partnership" class="partnership-content">
+            <h2>Partnership in Action</h2>
+            
+            <div class="partnership-highlight">
+                <h3>From Students to Entrepreneurs</h3>
+                <p>The young women I trained in February 2024 have formed their own collaborative partnership, working together to develop their skills and create a sustainable design business. They've evolved from students learning the basics to service providers creating professional marketing materials for churches and businesses throughout their community.</p>
+            </div>
+            
+            <div class="journey-grid">
+                <div class="journey-card">
+                    <h3>Collaborative Partnership</h3>
+                    <p>Rather than working individually, the trainees recognized the power of collaboration. They formed a partnership that allows them to take on larger projects, share skills, and support each other's growth.</p>
+                </div>
+                
+                <div class="journey-card">
+                    <h3>Real Client Work</h3>
+                    <p>They're now creating professional marketing materials including logos, flyers, banners, and promotional content for local churches and businesses, building both their portfolio and their reputation.</p>
+                </div>
+                
+                <div class="journey-card">
+                    <h3>Skill Development</h3>
+                    <p>Through ongoing practice and collaboration, their design skills continue to improve. Each project presents new challenges that push their creative and technical abilities forward.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="portfolio" class="section">
+        <h2>Portfolio Showcase</h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">Witness the incredible growth and professional quality work being produced by our Rwanda design partnership.</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-placeholder">
+                    Church Logo Design
+                </div>
+                <div class="portfolio-info">
+                    <h4>Church Branding</h4>
+                    <p>Professional logo designs created for local Anglican churches, incorporating traditional and modern elements.</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-placeholder">
+                    Event Flyer
+                </div>
+                <div class="portfolio-info">
+                    <h4>Event Marketing</h4>
+                    <p>Eye-catching flyers and promotional materials for community events and church gatherings.</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-placeholder">
+                    Business Card Design
+                </div>
+                <div class="portfolio-info">
+                    <h4>Business Materials</h4>
+                    <p>Professional business cards and stationery for local entrepreneurs and small businesses.</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-placeholder">
+                    Social Media Graphics
+                </div>
+                <div class="portfolio-info">
+                    <h4>Digital Marketing</h4>
+                    <p>Social media graphics and digital content for online promotion and community engagement.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 15px;">
+            <h3 style="color: #2c5530; margin-bottom: 1rem;">Portfolio Development</h3>
+            <p>Each project represents not just a completed design, but a step toward building a comprehensive portfolio that showcases their growing expertise and prepares them for expanded client opportunities.</p>
+        </div>
+    </section>
+
+    <section id="mentorship" class="section">
+        <h2>Ongoing Mentorship</h2>
+        
+        <div class="journey-grid">
+            <div class="journey-card">
+                <h3>Design Consultation</h3>
+                <p>I continue to provide feedback on their design work, helping refine concepts, improve technical execution, and ensure professional quality standards are maintained.</p>
+            </div>
+            
+            <div class="journey-card">
+                <h3>Portfolio Strategy</h3>
+                <p>Together we're developing a strategic approach to portfolio building, selecting the best work, organizing it effectively, and preparing materials that will attract future clients.</p>
+            </div>
+            
+            <div class="journey-card">
+                <h3>Business Development</h3>
+                <p>Beyond design skills, I'm helping them understand client relationships, pricing strategies, project management, and the business side of running a design service.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="lessons" class="section">
+        <h2>Lessons Learned</h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">Key insights from cross-cultural training, mentorship, and partnership building that could benefit others pursuing similar initiatives.</p>
+        
+        <div class="lessons-grid">
+            <div class="lesson-card">
+                <h4>Partnership Over Charity</h4>
+                <p>The most sustainable impact comes from true partnership. Rather than simply providing resources, collaborating as equals creates lasting change and mutual respect.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h4>Local Leadership is Essential</h4>
+                <p>Working with established leaders like Clementine and the Mother's Union provided cultural context, community trust, and ongoing support that external efforts alone couldn't achieve.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h4>Skills + Community = Success</h4>
+                <p>Teaching technical skills worked best when combined with fostering community among trainees. Their collaborative partnership multiplied individual capabilities.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h4>Ongoing Support Matters</h4>
+                <p>Initial training was just the beginning. Continued mentorship, feedback, and business guidance proved crucial for translating skills into sustainable income.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h4>Cultural Adaptation</h4>
+                <p>Design principles are universal, but application must consider local aesthetics, cultural values, and market preferences to be truly effective.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h4>Technology as Tool, Not Solution</h4>
+                <p>iPads and software were enablers, but success came from combining technology with hands-on training, ongoing support, and community building.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="section">
+        <h2>Building Toward Independence</h2>
+        
+        <div class="independence-timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Current Stage: Skill Refinement</h4>
+                    <p>The partnership is actively taking on client work while continuing to develop their technical skills and build their reputation in the community.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Next Phase: Income Generation</h4>
+                    <p>Focus on establishing consistent pricing, expanding client base, and generating reliable income that can support their families and personal goals.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Long-term Vision: Business Expansion</h4>
+                    <p>Goal of growing into a recognized design business that can train others, take on larger projects, and become a sustainable source of creative services in Rwanda.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Legacy Goal: Teaching Others</h4>
+                    <p>Ultimate vision of the partnership becoming mentors themselves, training the next generation of young women in graphic design and entrepreneurship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Support the Mission</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">This journey of empowerment through design continues to evolve. There are many ways to support and follow the progress of this remarkable partnership.</p>
+            
+            <a href="mailto:contact@impactrwanda.org" class="btn">Get Involved</a>
+            <a href="#" class="btn">Follow Our Progress</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+            <h3 style="margin-bottom: 1rem;">Impact Rwanda</h3>
+            <p>Empowering young women through graphic design training and sustainable partnerships in Rwanda.</p>
+            <p style="margin-top: 2rem; opacity: 0.7;">&copy; 2024 Impact Rwanda. Building bridges through design and partnership.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add animation on scroll for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections for animation
+        document.querySelectorAll('.journey-card, .lesson-card, .portfolio-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
